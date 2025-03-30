@@ -55,14 +55,12 @@
             <artifactId>selenium-java</artifactId>
             <version>4.30.0</version>
         </dependency>
-
-        <!-- WebDriverManager to auto-download browser drivers -->
+        <!-- files Dependency -->
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>6.0.0</version>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.15.1</version>
         </dependency>
-
         <!-- Log -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -75,5 +73,33 @@
             <version>1.4.12</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-selenium-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/selenium-resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/selenium</directory>
+                                    <includes>
+                                        <include>**/*</include> <!-- Copies everything inside selenium/ -->
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

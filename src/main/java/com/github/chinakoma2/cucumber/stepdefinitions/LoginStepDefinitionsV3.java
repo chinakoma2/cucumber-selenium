@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class LoginStepDefinitionsV3 {
-/*
+
     @Autowired
     SeleniumService seleniumService;
 
@@ -49,6 +49,6 @@ public class LoginStepDefinitionsV3 {
     public void the_user_should_be_redirected_to_the_homepage() {
         seleniumService.waitUntil(ExpectedConditions.urlToBe(testPropertiesService.getHomeUrl()));
     }
-*/
+
 
 }

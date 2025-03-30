@@ -1,6 +1,6 @@
 Feature: Login Functionality
 
-  @login @ignore
+  @login
   Scenario Outline: Successful login with valid credentials
     Given the user is on the login page
     When the user enters <Credentials Name> username and password

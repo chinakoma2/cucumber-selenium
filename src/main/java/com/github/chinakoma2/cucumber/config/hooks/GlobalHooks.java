@@ -34,12 +34,12 @@ public class GlobalHooks {
     @Before
     public void setup(Scenario scenario) {
         logger.info(" Starting Scenario: {}",scenario.getName());
-      //  seleniumService.setUp();
+        seleniumService.setUp();
     }
 
     @After
     public void teardown(Scenario scenario) {
-     /*   if(scenario.isFailed()){
+        if(scenario.isFailed()){
             logger.info(" Scenario Failed: {}",scenario.getName());
             String screenshotPath = seleniumService.takeScreenshot();
             if (screenshotPath != null ) { // Attach only if the test fails
@@ -50,8 +50,6 @@ public class GlobalHooks {
             logger.info(" Scenario Passed: {}",scenario.getName());
         }
         seleniumService.tearDown();
-
-      */
     }
 }
 

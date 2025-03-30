@@ -1,9 +1,10 @@
 package com.github.chinakoma2.cucumber.services;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.github.chinakoma2.cucumber.utils.SeleniumPathUtil;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Service;
@@ -21,17 +22,19 @@ public class SeleniumService {
     WebDriver driver;
 
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        System.setProperty("webdriver.chrome.driver", SeleniumPathUtil.getChromeDriverPath());
+        ChromeOptions options = new ChromeOptions();
+        options.setBinary(SeleniumPathUtil.getChromeBinaryPath());
+        this.driver = new ChromeDriver(options);
+        this.driver.manage().window().maximize();
     }
 
     public void navigateTo(String url) {
-        driver.get(url);
+        this.driver.get(url);
     }
 
     public WebElement getWebElement(By by) {
-        return driver.findElement(by);
+        return this.driver.findElement(by);
     }
 
     public void typeIn(WebElement webElement, String text) {
@@ -48,11 +51,11 @@ public class SeleniumService {
 
 
     public void tearDown() {
-        driver.quit();
+        this.driver.quit();
     }
 
     public void waitUntil(ExpectedCondition<Boolean> expectedCondition) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
         wait.until(expectedCondition);
     }
 
@@ -61,7 +64,7 @@ public class SeleniumService {
         String screenshotPath = "target/screenshots/screenshot_" + timestamp + ".png";
 
         try {
-            File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File source = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.FILE);
             File destination = new File(screenshotPath);
             FileUtils.copyFile(source, destination);
             return screenshotPath;
