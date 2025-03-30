@@ -9,7 +9,7 @@ public class CucumberMethodRunner {
                 "src/test/resources/features",
                 "--glue", "com.github.chinakoma2.cucumber.stepdefinitions",
                 "--glue", "com.github.chinakoma2.cucumber.config",
-                "--tags", "and not @ignore",
+                "--tags", "@login and not @ignore",
                 "--plugin", "pretty",
                 "--plugin", "summary",
                 "--plugin", "html:target/cucumber-reports.html"
